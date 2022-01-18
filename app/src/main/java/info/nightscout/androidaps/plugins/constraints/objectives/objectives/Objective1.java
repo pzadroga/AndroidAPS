@@ -1,5 +1,7 @@
 package info.nightscout.androidaps.plugins.constraints.objectives.objectives;
 
+import androidx.fragment.app.FragmentActivity;
+
 import java.util.List;
 
 import javax.inject.Inject;
@@ -7,16 +9,29 @@ import javax.inject.Inject;
 import dagger.android.HasAndroidInjector;
 import info.nightscout.androidaps.R;
 import info.nightscout.androidaps.interfaces.PluginType;
+import info.nightscout.androidaps.plugins.constraints.objectives.ObjectivesPlugin;
 import info.nightscout.androidaps.plugins.general.actions.ActionsPlugin;
 import info.nightscout.androidaps.utils.sharedPreferences.SP;
 
 public class Objective1 extends Objective {
     @Inject SP sp;
     @Inject ActionsPlugin actionsPlugin;
+    @Inject ObjectivesPlugin objectivesPlugin;
 
     @Inject
     public Objective1(HasAndroidInjector injector) {
         super(injector, "usage", R.string.objectives_usage_objective, R.string.objectives_usage_gate);
+        hasSpecialInput = true;
+    }
+
+    @Override
+    public boolean specialActionEnabled() {
+        return true;
+    }
+
+    @Override
+    public void specialAction(FragmentActivity activity, String input) {
+        objectivesPlugin.completeObjectives(activity, input);
     }
 
     @Override
