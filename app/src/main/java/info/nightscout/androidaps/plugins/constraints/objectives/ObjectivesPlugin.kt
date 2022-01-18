@@ -1,10 +1,7 @@
 package info.nightscout.androidaps.plugins.constraints.objectives
 
 import androidx.fragment.app.FragmentActivity
-import com.google.common.base.Charsets
-import com.google.common.hash.Hashing
 import dagger.android.HasAndroidInjector
-import info.nightscout.androidaps.BuildConfig
 import info.nightscout.androidaps.Config
 import info.nightscout.androidaps.R
 import info.nightscout.androidaps.interfaces.*
@@ -118,10 +115,10 @@ class ObjectivesPlugin @Inject constructor(
     }
 
     fun completeObjectives(activity: FragmentActivity, request: String) {
-        val requestCode = sp.getString(R.string.key_objectives_request_code, "")
-        var url = sp.getString(R.string.key_nsclientinternal_url, "").toLowerCase(Locale.getDefault())
-        if (!url.endsWith("/")) url = "$url/"
-        @Suppress("DEPRECATION") val hashNS = Hashing.sha1().hashString(url + BuildConfig.APPLICATION_ID + "/" + requestCode, Charsets.UTF_8).toString()
+        // val requestCode = sp.getString(R.string.key_objectives_request_code, "")
+        // var url = sp.getString(R.string.key_nsclientinternal_url, "").toLowerCase(Locale.getDefault())
+        // if (!url.endsWith("/")) url = "$url/"
+        // @Suppress("DEPRECATION") val hashNS = Hashing.sha1().hashString(url + BuildConfig.APPLICATION_ID + "/" + requestCode, Charsets.UTF_8).toString()
         if (request.equals("dupa", ignoreCase = true)) {
             sp.putLong("Objectives_" + "usage" + "_started", DateUtil.now())
             sp.putLong("Objectives_" + "usage" + "_accomplished", DateUtil.now())
