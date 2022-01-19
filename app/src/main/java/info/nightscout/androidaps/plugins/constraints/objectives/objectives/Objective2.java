@@ -1,5 +1,7 @@
 package info.nightscout.androidaps.plugins.constraints.objectives.objectives;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.util.Collections;
 import java.util.List;
 
@@ -11,7 +13,14 @@ public class Objective2 extends Objective {
 
 
     public Objective2(HasAndroidInjector injector) {
+        this(injector, false);
+    }
+
+    public Objective2(@NotNull HasAndroidInjector injector, boolean isComplete) {
         super(injector, "exam", R.string.objectives_exam_objective, R.string.objectives_exam_gate);
+        if (isComplete) {
+            completeAllTasks();
+        }
         for (Task task : tasks) {
             if (!task.isCompleted()) setAccomplishedOn(0);
         }
@@ -217,6 +226,12 @@ public class Objective2 extends Objective {
 
         for (Task task : tasks)
             Collections.shuffle(((ExamTask)task).options);
+    }
+
+    void completeAllTasks() {
+        for (Task task : tasks) {
+            ((ExamTask) task).setAnswered(true);
+        }
     }
 
 }

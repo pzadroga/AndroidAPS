@@ -97,6 +97,21 @@ class ObjectivesPlugin @Inject constructor(
         objectives.add(Objective10(injector))
     }
 
+    private fun setupObjectivesComplete() {
+        objectives.clear()
+        objectives.add(Objective0(injector))
+        objectives.add(Objective1(injector))
+        objectives.add(Objective2(injector, true))
+        objectives.add(Objective3(injector))
+        objectives.add(Objective4(injector))
+        objectives.add(Objective5(injector))
+        objectives.add(Objective6(injector))
+        objectives.add(Objective7(injector))
+        objectives.add(Objective8(injector))
+        objectives.add(Objective9(injector))
+        objectives.add(Objective10(injector))
+    }
+
     fun reset() {
         for (objective in objectives) {
             objective.startedOn = 0
@@ -140,7 +155,7 @@ class ObjectivesPlugin @Inject constructor(
             // sp.putLong("Objectives_" + "smb" + "_accomplished", DateUtil.now())
             // sp.putLong("Objectives_" + "auto" + "_started", DateUtil.now())
             // sp.putLong("Objectives_" + "auto" + "_accomplished", DateUtil.now())
-            setupObjectives()
+            setupObjectivesComplete()
             OKDialog.show(activity, resourceHelper.gs(R.string.objectives), resourceHelper.gs(R.string.codeaccepted))
         } else {
             OKDialog.show(activity, resourceHelper.gs(R.string.objectives), resourceHelper.gs(R.string.codeinvalid))
