@@ -217,7 +217,7 @@ public class NSClientPlugin extends PluginBase {
             // APS or pumpcontrol mode
             SwitchPreference key_ns_upload_only = preferenceFragment.findPreference(resourceHelper.gs(R.string.key_ns_upload_only));
             if (key_ns_upload_only != null)
-                key_ns_upload_only.setVisible(buildHelper.isEngineeringMode());
+                key_ns_upload_only.setVisible(true);
         }
     }
 
