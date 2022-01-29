@@ -40,7 +40,7 @@ class ObjectivesPlugin @Inject constructor(
     var objectives: MutableList<Objective> = ArrayList()
 
     companion object {
-        const val USAGE_OBJECTIVE = 1
+        // const val USAGE_OBJECTIVE = 1
     }
 
     public override fun onStart() {
