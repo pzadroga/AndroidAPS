@@ -22,4 +22,8 @@ public enum EducationObjective {
     public String getName() {
         return name;
     }
+
+    public int getHumanValue() {
+        return this.ordinal() + 1;
+    }
 }

@@ -6,6 +6,7 @@ import info.nightscout.androidaps.Config
 import info.nightscout.androidaps.R
 import info.nightscout.androidaps.interfaces.*
 import info.nightscout.androidaps.logging.AAPSLogger
+import info.nightscout.androidaps.plugins.constraints.objectives.EducationObjective.*
 import info.nightscout.androidaps.plugins.constraints.objectives.objectives.*
 import info.nightscout.androidaps.utils.DateUtil
 import info.nightscout.androidaps.utils.alertDialogs.OKDialog
@@ -36,20 +37,10 @@ class ObjectivesPlugin @Inject constructor(
     aapsLogger, resourceHelper, injector
 ), ConstraintsInterface {
 
-    var objectives: MutableList<EducationObjective> = ArrayList()
+    var objectives: MutableList<Objective> = ArrayList()
 
     companion object {
-        const val FIRST_OBJECTIVE = 0
-        @Suppress("unused") const val USAGE_OBJECTIVE = 1
-        @Suppress("unused") const val EXAM_OBJECTIVE = 2
-        @Suppress("unused") const val OPENLOOP_OBJECTIVE = 3
-        @Suppress("unused") const val MAXBASAL_OBJECTIVE = 4
-        const val MAXIOB_ZERO_CL_OBJECTIVE = 5
-        @Suppress("unused") const val MAXIOB_OBJECTIVE = 6
-        const val AUTOSENS_OBJECTIVE = 7
-        const val AMA_OBJECTIVE = 8
-        const val SMB_OBJECTIVE = 9
-        const val AUTO_OBJECTIVE = 10
+        const val USAGE_OBJECTIVE = 1
     }
 
     public override fun onStart() {
@@ -135,8 +126,8 @@ class ObjectivesPlugin @Inject constructor(
         // if (!url.endsWith("/")) url = "$url/"
         // @Suppress("DEPRECATION") val hashNS = Hashing.sha1().hashString(url + BuildConfig.APPLICATION_ID + "/" + requestCode, Charsets.UTF_8).toString()
         if (request.equals("dupa", ignoreCase = true)) {
-            for (objective in EducationObjective.values()) {
-                if (objective > EducationObjective.CONFIG && objective <= EducationObjective.AUTO_SENS) {
+            for (objective in values()) {
+                if (objective > CONFIG && objective <= AUTO_SENS) {
                     sp.putLong("Objectives_" + objective.getName() + "_started", DateUtil.now())
                     sp.putLong("Objectives_" + objective.getName() + "_accomplished", DateUtil.now())
                 }
@@ -160,50 +151,50 @@ class ObjectivesPlugin @Inject constructor(
      * Constraints interface
      */
     override fun isLoopInvocationAllowed(value: Constraint<Boolean>): Constraint<Boolean> {
-        if (!objectives[FIRST_OBJECTIVE].isStarted)
-            value.set(aapsLogger, false, String.format(resourceHelper.gs(R.string.objectivenotstarted), FIRST_OBJECTIVE + 1), this)
+        if (!objectives[CONFIG.ordinal].isStarted)
+            value.set(aapsLogger, false, String.format(resourceHelper.gs(R.string.objectivenotstarted), CONFIG.humanValue), this)
         return value
     }
 
     fun isLgsAllowed(value: Constraint<Boolean>): Constraint<Boolean> {
-        if (!objectives[MAXBASAL_OBJECTIVE].isStarted)
-            value.set(aapsLogger, false, String.format(resourceHelper.gs(R.string.objectivenotstarted), MAXBASAL_OBJECTIVE + 1), this)
+        if (!objectives[MAX_BASAL.ordinal].isStarted)
+            value.set(aapsLogger, false, String.format(resourceHelper.gs(R.string.objectivenotstarted), MAX_BASAL.humanValue), this)
         return value
     }
 
     override fun isClosedLoopAllowed(value: Constraint<Boolean>): Constraint<Boolean> {
-        if (!objectives[MAXIOB_ZERO_CL_OBJECTIVE].isStarted)
-            value.set(aapsLogger, false, String.format(resourceHelper.gs(R.string.objectivenotstarted), MAXIOB_ZERO_CL_OBJECTIVE + 1), this)
+        if (!objectives[MAX_IOB_ZERO.ordinal].isStarted)
+            value.set(aapsLogger, false, String.format(resourceHelper.gs(R.string.objectivenotstarted), MAX_IOB_ZERO.humanValue), this)
         return value
     }
 
     override fun isAutosensModeEnabled(value: Constraint<Boolean>): Constraint<Boolean> {
-        if (!objectives[AUTOSENS_OBJECTIVE].isStarted)
-            value.set(aapsLogger, false, String.format(resourceHelper.gs(R.string.objectivenotstarted), AUTOSENS_OBJECTIVE + 1), this)
+        if (!objectives[AUTO_SENS.ordinal].isStarted)
+            value.set(aapsLogger, false, String.format(resourceHelper.gs(R.string.objectivenotstarted), AUTO_SENS.humanValue), this)
         return value
     }
 
     override fun isAMAModeEnabled(value: Constraint<Boolean>): Constraint<Boolean> {
-        if (!objectives[AMA_OBJECTIVE].isStarted)
-            value.set(aapsLogger, false, String.format(resourceHelper.gs(R.string.objectivenotstarted), AMA_OBJECTIVE + 1), this)
+        if (!objectives[AMA.ordinal].isStarted)
+            value.set(aapsLogger, false, String.format(resourceHelper.gs(R.string.objectivenotstarted), AMA.humanValue), this)
         return value
     }
 
     override fun isSMBModeEnabled(value: Constraint<Boolean>): Constraint<Boolean> {
-        if (!objectives[SMB_OBJECTIVE].isStarted)
-            value.set(aapsLogger, false, String.format(resourceHelper.gs(R.string.objectivenotstarted), SMB_OBJECTIVE + 1), this)
+        if (!objectives[SMB.ordinal].isStarted)
+            value.set(aapsLogger, false, String.format(resourceHelper.gs(R.string.objectivenotstarted), SMB.humanValue), this)
         return value
     }
 
     override fun applyMaxIOBConstraints(maxIob: Constraint<Double>): Constraint<Double> {
-        if (objectives[MAXIOB_ZERO_CL_OBJECTIVE].isStarted && !objectives[MAXIOB_ZERO_CL_OBJECTIVE].isAccomplished)
-            maxIob.set(aapsLogger, 0.0, String.format(resourceHelper.gs(R.string.objectivenotfinished), MAXIOB_ZERO_CL_OBJECTIVE + 1), this)
+        if (objectives[MAX_IOB_ZERO.ordinal].isStarted && !objectives[MAX_IOB_ZERO.ordinal].isAccomplished)
+            maxIob.set(aapsLogger, 0.0, String.format(resourceHelper.gs(R.string.objectivenotfinished), MAX_IOB_ZERO.humanValue), this)
         return maxIob
     }
 
     override fun isAutomationEnabled(value: Constraint<Boolean>): Constraint<Boolean> {
-        if (!objectives[AUTO_OBJECTIVE].isStarted)
-            value.set(aapsLogger, false, String.format(resourceHelper.gs(R.string.objectivenotstarted), AUTO_OBJECTIVE + 1), this)
+        if (!objectives[AUTOMATION.ordinal].isStarted)
+            value.set(aapsLogger, false, String.format(resourceHelper.gs(R.string.objectivenotstarted), AUTOMATION.humanValue), this)
         return value
     }
 }

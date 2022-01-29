@@ -7,6 +7,7 @@ import info.nightscout.androidaps.R
 import info.nightscout.androidaps.TestBase
 import info.nightscout.androidaps.interfaces.ActivePluginProvider
 import info.nightscout.androidaps.interfaces.Constraint
+import info.nightscout.androidaps.plugins.constraints.objectives.EducationObjective.*
 import info.nightscout.androidaps.plugins.constraints.objectives.objectives.Objective
 import info.nightscout.androidaps.utils.DateUtil
 import info.nightscout.androidaps.utils.resources.ResourceHelper
@@ -44,16 +45,16 @@ class ObjectivesPluginTest : TestBase() {
     }
 
     @Test fun notStartedObjectivesShouldLimitLoopInvocation() {
-        objectivesPlugin.objectives[ObjectivesPlugin.FIRST_OBJECTIVE].startedOn = 0
+        objectivesPlugin.objectives[CONFIG.ordinal].startedOn = 0
         var c = Constraint(true)
         c = objectivesPlugin.isLoopInvocationAllowed(c)
         Assert.assertEquals("Objectives: Objective 1 not started", c.getReasons(aapsLogger))
         Assert.assertEquals(false, c.value())
-        objectivesPlugin.objectives[ObjectivesPlugin.FIRST_OBJECTIVE].startedOn = DateUtil.now()
+        objectivesPlugin.objectives[CONFIG.ordinal].startedOn = DateUtil.now()
     }
 
     @Test fun notStartedObjective6ShouldLimitClosedLoop() {
-        objectivesPlugin.objectives[ObjectivesPlugin.MAXIOB_ZERO_CL_OBJECTIVE].startedOn = 0
+        objectivesPlugin.objectives[MAX_IOB_ZERO.ordinal].startedOn = 0
         var c = Constraint(true)
         c = objectivesPlugin.isClosedLoopAllowed(c)
         Assert.assertEquals(true, c.getReasons(aapsLogger).contains("Objective 6 not started"))
@@ -61,7 +62,7 @@ class ObjectivesPluginTest : TestBase() {
     }
 
     @Test fun notStartedObjective8ShouldLimitAutosensMode() {
-        objectivesPlugin.objectives[ObjectivesPlugin.AUTOSENS_OBJECTIVE].startedOn = 0
+        objectivesPlugin.objectives[AUTO_SENS.ordinal].startedOn = 0
         var c = Constraint(true)
         c = objectivesPlugin.isAutosensModeEnabled(c)
         Assert.assertEquals(true, c.getReasons(aapsLogger).contains("Objective 8 not started"))
@@ -69,7 +70,7 @@ class ObjectivesPluginTest : TestBase() {
     }
 
     @Test fun notStartedObjective9ShouldLimitAMAMode() {
-        objectivesPlugin.objectives[ObjectivesPlugin.AMA_OBJECTIVE].startedOn = 0
+        objectivesPlugin.objectives[AMA.ordinal].startedOn = 0
         var c = Constraint(true)
         c = objectivesPlugin.isAMAModeEnabled(c)
         Assert.assertEquals(true, c.getReasons(aapsLogger).contains("Objective 9 not started"))
@@ -77,7 +78,7 @@ class ObjectivesPluginTest : TestBase() {
     }
 
     @Test fun notStartedObjective10ShouldLimitSMBMode() {
-        objectivesPlugin.objectives[ObjectivesPlugin.SMB_OBJECTIVE].startedOn = 0
+        objectivesPlugin.objectives[SMB.ordinal].startedOn = 0
         var c = Constraint(true)
         c = objectivesPlugin.isSMBModeEnabled(c)
         Assert.assertEquals(true, c.getReasons(aapsLogger).contains("Objective 10 not started"))

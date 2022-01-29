@@ -8,10 +8,13 @@ import info.nightscout.androidaps.MainApp
 import info.nightscout.androidaps.R
 import info.nightscout.androidaps.TestBaseWithProfile
 import info.nightscout.androidaps.dana.DanaPump
+import info.nightscout.androidaps.danar.DanaRPlugin
+import info.nightscout.androidaps.danars.DanaRSPlugin
 import info.nightscout.androidaps.plugins.aps.openAPSAMA.OpenAPSAMAPlugin
 import info.nightscout.androidaps.plugins.aps.openAPSSMB.OpenAPSSMBPlugin
 import info.nightscout.androidaps.plugins.configBuilder.ConfigBuilderPlugin
 import info.nightscout.androidaps.plugins.configBuilder.ConstraintChecker
+import info.nightscout.androidaps.plugins.constraints.objectives.EducationObjective.*
 import info.nightscout.androidaps.plugins.constraints.objectives.ObjectivesPlugin
 import info.nightscout.androidaps.plugins.constraints.objectives.objectives.Objective
 import info.nightscout.androidaps.plugins.constraints.safety.SafetyPlugin
@@ -20,8 +23,6 @@ import info.nightscout.androidaps.plugins.general.nsclient.UploadQueue
 import info.nightscout.androidaps.plugins.iob.iobCobCalculator.IobCobCalculatorPlugin
 import info.nightscout.androidaps.plugins.pump.combo.ComboPlugin
 import info.nightscout.androidaps.plugins.pump.common.bolusInfo.DetailedBolusInfoStorage
-import info.nightscout.androidaps.danar.DanaRPlugin
-import info.nightscout.androidaps.danars.DanaRSPlugin
 import info.nightscout.androidaps.plugins.pump.insight.LocalInsightPlugin
 import info.nightscout.androidaps.plugins.pump.virtual.VirtualPumpPlugin
 import info.nightscout.androidaps.plugins.sensitivity.SensitivityOref1Plugin
@@ -152,7 +153,7 @@ class ConstraintsCheckerTest : TestBaseWithProfile() {
     @Test
     fun isClosedLoopAllowedTest() {
         `when`(sp.getString(R.string.key_aps_mode, "open")).thenReturn("closed")
-        objectivesPlugin.objectives[ObjectivesPlugin.MAXIOB_ZERO_CL_OBJECTIVE].startedOn = 0
+        objectivesPlugin.objectives[MAX_IOB_ZERO.ordinal].startedOn = 0
         var c: Constraint<Boolean> = constraintChecker.isClosedLoopAllowed()
         aapsLogger.debug("Reason list: " + c.reasonList.toString())
 //        Assert.assertTrue(c.reasonList[0].toString().contains("Closed loop is disabled")) // Safety & Objectives
@@ -167,7 +168,7 @@ class ConstraintsCheckerTest : TestBaseWithProfile() {
     // Safety & Objectives
     @Test
     fun isAutosensModeEnabledTest() {
-        objectivesPlugin.objectives[ObjectivesPlugin.AUTOSENS_OBJECTIVE].startedOn = 0
+        objectivesPlugin.objectives[AUTO_SENS.ordinal].startedOn = 0
         `when`(sp.getBoolean(R.string.key_openapsama_useautosens, false)).thenReturn(false)
         val c = constraintChecker.isAutosensModeEnabled()
         Assert.assertEquals(true, c.reasonList.size == 2) // Safety & Objectives
@@ -178,7 +179,7 @@ class ConstraintsCheckerTest : TestBaseWithProfile() {
     // Objectives
     @Test
     fun isAMAModeEnabledTest() {
-        objectivesPlugin.objectives[ObjectivesPlugin.AMA_OBJECTIVE].startedOn = 0
+        objectivesPlugin.objectives[AMA.ordinal].startedOn = 0
         val c = constraintChecker.isAMAModeEnabled()
         Assert.assertEquals(true, c.reasonList.size == 1) // Objectives
         Assert.assertEquals(true, c.mostLimitedReasonList.size == 1) // Objectives
@@ -206,7 +207,7 @@ class ConstraintsCheckerTest : TestBaseWithProfile() {
     // Safety & Objectives
     @Test
     fun isSMBModeEnabledTest() {
-        objectivesPlugin.objectives[ObjectivesPlugin.SMB_OBJECTIVE].startedOn = 0
+        objectivesPlugin.objectives[SMB.ordinal].startedOn = 0
         `when`(sp.getBoolean(R.string.key_use_smb, false)).thenReturn(false)
         `when`(sp.getString(R.string.key_aps_mode, "open")).thenReturn("open")
 //        `when`(constraintChecker.isClosedLoopAllowed()).thenReturn(Constraint(true))

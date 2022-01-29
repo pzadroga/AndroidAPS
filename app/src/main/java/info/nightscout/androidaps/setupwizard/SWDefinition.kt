@@ -17,6 +17,7 @@ import info.nightscout.androidaps.interfaces.ProfileFunction
 import info.nightscout.androidaps.plugins.aps.loop.LoopPlugin
 import info.nightscout.androidaps.plugins.bus.RxBusWrapper
 import info.nightscout.androidaps.plugins.configBuilder.ConfigBuilderPlugin
+import info.nightscout.androidaps.plugins.constraints.objectives.EducationObjective
 import info.nightscout.androidaps.plugins.constraints.objectives.ObjectivesFragment
 import info.nightscout.androidaps.plugins.constraints.objectives.ObjectivesPlugin
 import info.nightscout.androidaps.plugins.general.nsclient.NSClientPlugin
@@ -343,8 +344,8 @@ class SWDefinition @Inject constructor(
         .add(SWBreak(injector))
         .add(SWFragment(injector, this)
             .add(ObjectivesFragment()))
-        .validator { objectivesPlugin.objectives[ObjectivesPlugin.FIRST_OBJECTIVE].isStarted }
-        .visibility { !objectivesPlugin.objectives[ObjectivesPlugin.FIRST_OBJECTIVE].isStarted && config.APS }
+        .validator { objectivesPlugin.objectives[EducationObjective.CONFIG.ordinal].isStarted }
+        .visibility { !objectivesPlugin.objectives[EducationObjective.CONFIG.ordinal].isStarted && config.APS }
 
     private fun swDefinitionFull() { // List all the screens here
         add(screenSetupWizard)
