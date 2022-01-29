@@ -11,6 +11,7 @@ import info.nightscout.androidaps.interfaces.ActivePluginProvider;
 import info.nightscout.androidaps.interfaces.PluginBase;
 import info.nightscout.androidaps.interfaces.PluginType;
 import info.nightscout.androidaps.plugins.aps.loop.LoopPlugin;
+import info.nightscout.androidaps.plugins.constraints.objectives.EducationObjective;
 import info.nightscout.androidaps.plugins.general.nsclient.NSClientPlugin;
 import info.nightscout.androidaps.plugins.iob.iobCobCalculator.IobCobCalculatorPlugin;
 import info.nightscout.androidaps.plugins.pump.virtual.VirtualPumpPlugin;
@@ -28,7 +29,7 @@ public class Objective0 extends Objective {
     @Inject IobCobCalculatorPlugin iobCobCalculatorPlugin;
 
     public Objective0(HasAndroidInjector injector) {
-        super(injector, info.nightscout.androidaps.plugins.constraints.objectives.Objective.CONFIG, R.string.objectives_0_objective, R.string.objectives_0_gate);
+        super(injector, EducationObjective.CONFIG, R.string.objectives_0_objective, R.string.objectives_0_gate);
     }
 
     @Override

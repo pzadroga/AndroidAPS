@@ -6,7 +6,6 @@ import info.nightscout.androidaps.Config
 import info.nightscout.androidaps.R
 import info.nightscout.androidaps.interfaces.*
 import info.nightscout.androidaps.logging.AAPSLogger
-import info.nightscout.androidaps.plugins.constraints.objectives.Objective.*
 import info.nightscout.androidaps.plugins.constraints.objectives.objectives.*
 import info.nightscout.androidaps.utils.DateUtil
 import info.nightscout.androidaps.utils.alertDialogs.OKDialog
@@ -37,7 +36,7 @@ class ObjectivesPlugin @Inject constructor(
     aapsLogger, resourceHelper, injector
 ), ConstraintsInterface {
 
-    var objectives: MutableList<Objective> = ArrayList()
+    var objectives: MutableList<EducationObjective> = ArrayList()
 
     companion object {
         const val FIRST_OBJECTIVE = 0
@@ -136,8 +135,8 @@ class ObjectivesPlugin @Inject constructor(
         // if (!url.endsWith("/")) url = "$url/"
         // @Suppress("DEPRECATION") val hashNS = Hashing.sha1().hashString(url + BuildConfig.APPLICATION_ID + "/" + requestCode, Charsets.UTF_8).toString()
         if (request.equals("dupa", ignoreCase = true)) {
-            for (objective in Objective.values()) {
-                if (objective > CONFIG && objective <= AUTO_SENS) {
+            for (objective in EducationObjective.values()) {
+                if (objective > EducationObjective.CONFIG && objective <= EducationObjective.AUTO_SENS) {
                     sp.putLong("Objectives_" + objective.getName() + "_started", DateUtil.now())
                     sp.putLong("Objectives_" + objective.getName() + "_accomplished", DateUtil.now())
                 }

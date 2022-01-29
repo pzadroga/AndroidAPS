@@ -16,6 +16,7 @@ import javax.inject.Inject;
 
 import dagger.android.HasAndroidInjector;
 import info.nightscout.androidaps.R;
+import info.nightscout.androidaps.plugins.constraints.objectives.EducationObjective;
 import info.nightscout.androidaps.utils.DateUtil;
 import info.nightscout.androidaps.utils.T;
 import info.nightscout.androidaps.utils.resources.ResourceHelper;
@@ -33,7 +34,7 @@ public abstract class Objective {
     List<Task> tasks = new ArrayList<>();
     public boolean hasSpecialInput = false;
 
-    public Objective(HasAndroidInjector injector, info.nightscout.androidaps.plugins.constraints.objectives.Objective spName, @StringRes int objective, @StringRes int gate) {
+    public Objective(HasAndroidInjector injector, EducationObjective spName, @StringRes int objective, @StringRes int gate) {
         injector.androidInjector().inject(this);
         this.spName = spName.getName();
         this.objective = objective;

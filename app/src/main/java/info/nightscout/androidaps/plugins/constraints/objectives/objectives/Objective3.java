@@ -8,6 +8,7 @@ import javax.inject.Inject;
 
 import dagger.android.HasAndroidInjector;
 import info.nightscout.androidaps.R;
+import info.nightscout.androidaps.plugins.constraints.objectives.EducationObjective;
 import info.nightscout.androidaps.plugins.constraints.objectives.ObjectivesPlugin;
 import info.nightscout.androidaps.plugins.general.nsclient.NSClientPlugin;
 import info.nightscout.androidaps.plugins.general.nsclient.services.NSClientService;
@@ -25,7 +26,7 @@ public class Objective3 extends Objective {
 
     @Inject
     public Objective3(HasAndroidInjector injector) {
-        super(injector, info.nightscout.androidaps.plugins.constraints.objectives.Objective.OPEN_LOOP, R.string.objectives_openloop_objective, R.string.objectives_openloop_gate);
+        super(injector, EducationObjective.OPEN_LOOP, R.string.objectives_openloop_objective, R.string.objectives_openloop_gate);
         // disable option for skipping objectives for now
         // hasSpecialInput = true;
     }

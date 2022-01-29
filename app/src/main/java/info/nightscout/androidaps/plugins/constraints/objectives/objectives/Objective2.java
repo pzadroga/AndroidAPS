@@ -6,8 +6,8 @@ import java.util.Collections;
 import java.util.List;
 
 import dagger.android.HasAndroidInjector;
-import info.nightscout.androidaps.MainApp;
 import info.nightscout.androidaps.R;
+import info.nightscout.androidaps.plugins.constraints.objectives.EducationObjective;
 
 public class Objective2 extends Objective {
 
@@ -17,7 +17,7 @@ public class Objective2 extends Objective {
     }
 
     public Objective2(@NotNull HasAndroidInjector injector, boolean isComplete) {
-        super(injector, info.nightscout.androidaps.plugins.constraints.objectives.Objective.EXAM, R.string.objectives_exam_objective, R.string.objectives_exam_gate);
+        super(injector, EducationObjective.EXAM, R.string.objectives_exam_objective, R.string.objectives_exam_gate);
         if (isComplete) {
             completeAllTasks();
         }

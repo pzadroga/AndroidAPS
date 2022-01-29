@@ -4,12 +4,13 @@ import java.util.List;
 
 import dagger.android.HasAndroidInjector;
 import info.nightscout.androidaps.R;
+import info.nightscout.androidaps.plugins.constraints.objectives.EducationObjective;
 import info.nightscout.androidaps.utils.T;
 
 public class Objective10 extends Objective {
 
     public Objective10(HasAndroidInjector injector) {
-        super(injector, info.nightscout.androidaps.plugins.constraints.objectives.Objective.AUTOMATION, R.string.objectives_auto_objective, R.string.objectives_auto_gate);
+        super(injector, EducationObjective.AUTOMATION, R.string.objectives_auto_objective, R.string.objectives_auto_gate);
     }
 
     @Override

@@ -4,12 +4,13 @@ import java.util.List;
 
 import dagger.android.HasAndroidInjector;
 import info.nightscout.androidaps.R;
+import info.nightscout.androidaps.plugins.constraints.objectives.EducationObjective;
 import info.nightscout.androidaps.utils.T;
 
 public class Objective8 extends Objective {
 
     public Objective8(HasAndroidInjector injector) {
-        super(injector, info.nightscout.androidaps.plugins.constraints.objectives.Objective.AMA, R.string.objectives_ama_objective, 0);
+        super(injector, EducationObjective.AMA, R.string.objectives_ama_objective, 0);
     }
 
     @Override

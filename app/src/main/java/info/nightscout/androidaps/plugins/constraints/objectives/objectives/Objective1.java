@@ -9,6 +9,7 @@ import javax.inject.Inject;
 import dagger.android.HasAndroidInjector;
 import info.nightscout.androidaps.R;
 import info.nightscout.androidaps.interfaces.PluginType;
+import info.nightscout.androidaps.plugins.constraints.objectives.EducationObjective;
 import info.nightscout.androidaps.plugins.constraints.objectives.ObjectivesPlugin;
 import info.nightscout.androidaps.plugins.general.actions.ActionsPlugin;
 import info.nightscout.androidaps.utils.sharedPreferences.SP;
@@ -20,7 +21,7 @@ public class Objective1 extends Objective {
 
     @Inject
     public Objective1(HasAndroidInjector injector) {
-        super(injector, info.nightscout.androidaps.plugins.constraints.objectives.Objective.USAGE, R.string.objectives_usage_objective, R.string.objectives_usage_gate);
+        super(injector, EducationObjective.USAGE, R.string.objectives_usage_objective, R.string.objectives_usage_gate);
         hasSpecialInput = true;
     }
 

@@ -1,6 +1,6 @@
 package info.nightscout.androidaps.plugins.constraints.objectives;
 
-public enum Objective {
+public enum EducationObjective {
     CONFIG("config"),
     USAGE("usage"),
     EXAM("exam"),
@@ -15,7 +15,7 @@ public enum Objective {
 
     private final String name;
 
-    Objective(String name) {
+    EducationObjective(String name) {
         this.name = name;
     }
 
