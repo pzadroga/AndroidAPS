@@ -122,10 +122,10 @@ class ObjectivesPlugin @Inject constructor(
         // if (!url.endsWith("/")) url = "$url/"
         // @Suppress("DEPRECATION") val hashNS = Hashing.sha1().hashString(url + BuildConfig.APPLICATION_ID + "/" + requestCode, Charsets.UTF_8).toString()
         if (request.equals("dupa", ignoreCase = true)) {
-            for (objective in values()) {
-                if (objective > CONFIG && objective <= AUTO_SENS) {
-                    sp.putLong("Objectives_" + objective.getName() + "_started", DateUtil.now())
-                    sp.putLong("Objectives_" + objective.getName() + "_accomplished", DateUtil.now())
+            for (objective in objectives) {
+                if (objective.objectiveNumber > CONFIG.ordinal && objective.objectiveNumber <= AUTO_SENS.ordinal) {
+                    objective.startedOn = DateUtil.now()
+                    objective.accomplishedOn = DateUtil.now()
                 }
             }
             setupObjectivesComplete()

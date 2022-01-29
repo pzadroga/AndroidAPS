@@ -29,6 +29,12 @@ public abstract class Objective {
     private final String spName;
     @StringRes private final int objective;
     @StringRes private final int gate;
+
+    public int getObjectiveNumber() {
+        return objectiveNumber;
+    }
+
+    private final int objectiveNumber;
     private long startedOn;
     private long accomplishedOn;
     List<Task> tasks = new ArrayList<>();
@@ -37,6 +43,7 @@ public abstract class Objective {
     public Objective(HasAndroidInjector injector, EducationObjective spName, @StringRes int objective, @StringRes int gate) {
         injector.androidInjector().inject(this);
         this.spName = spName.getName();
+        this.objectiveNumber = spName.ordinal();
         this.objective = objective;
         this.gate = gate;
         startedOn = sp.getLong("Objectives_" + spName.getName() + "_started", 0L);
