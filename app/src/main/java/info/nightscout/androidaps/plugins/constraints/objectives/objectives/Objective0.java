@@ -28,7 +28,7 @@ public class Objective0 extends Objective {
     @Inject IobCobCalculatorPlugin iobCobCalculatorPlugin;
 
     public Objective0(HasAndroidInjector injector) {
-        super(injector, "config", R.string.objectives_0_objective, R.string.objectives_0_gate);
+        super(injector, info.nightscout.androidaps.plugins.constraints.objectives.Objective.CONFIG, R.string.objectives_0_objective, R.string.objectives_0_gate);
     }
 
     @Override

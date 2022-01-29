@@ -13,7 +13,7 @@ public class Objective6 extends Objective {
     @Inject ConstraintChecker constraintChecker;
 
     public Objective6(HasAndroidInjector injector) {
-        super(injector, "maxiob", R.string.objectives_maxiob_objective, R.string.objectives_maxiob_gate);
+        super(injector, info.nightscout.androidaps.plugins.constraints.objectives.Objective.MAX_IOB, R.string.objectives_maxiob_objective, R.string.objectives_maxiob_gate);
     }
 
     @Override

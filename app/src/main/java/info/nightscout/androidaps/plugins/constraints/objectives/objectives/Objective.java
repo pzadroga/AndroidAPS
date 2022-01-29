@@ -33,13 +33,13 @@ public abstract class Objective {
     List<Task> tasks = new ArrayList<>();
     public boolean hasSpecialInput = false;
 
-    public Objective(HasAndroidInjector injector, String spName, @StringRes int objective, @StringRes int gate) {
+    public Objective(HasAndroidInjector injector, info.nightscout.androidaps.plugins.constraints.objectives.Objective spName, @StringRes int objective, @StringRes int gate) {
         injector.androidInjector().inject(this);
-        this.spName = spName;
+        this.spName = spName.getName();
         this.objective = objective;
         this.gate = gate;
-        startedOn = sp.getLong("Objectives_" + spName + "_started", 0L);
-        accomplishedOn = sp.getLong("Objectives_" + spName + "_accomplished", 0L);
+        startedOn = sp.getLong("Objectives_" + spName.getName() + "_started", 0L);
+        accomplishedOn = sp.getLong("Objectives_" + spName.getName() + "_accomplished", 0L);
         if ((accomplishedOn - DateUtil.now()) > T.hours(3).msecs() || (startedOn - DateUtil.now()) > T.hours(3).msecs()) { // more than 3 hours in the future
             startedOn = 0;
             accomplishedOn = 0;

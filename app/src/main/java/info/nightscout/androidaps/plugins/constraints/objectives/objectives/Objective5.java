@@ -14,7 +14,7 @@ public class Objective5 extends Objective {
     @Inject SafetyPlugin safetyPlugin;
 
     public Objective5(HasAndroidInjector injector) {
-        super(injector, "maxiobzero", R.string.objectives_maxiobzero_objective, R.string.objectives_maxiobzero_gate);
+        super(injector, info.nightscout.androidaps.plugins.constraints.objectives.Objective.MAX_IOB_ZERO, R.string.objectives_maxiobzero_objective, R.string.objectives_maxiobzero_gate);
     }
 
     @Override

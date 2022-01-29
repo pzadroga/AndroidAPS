@@ -9,7 +9,7 @@ import info.nightscout.androidaps.utils.T;
 public class Objective7 extends Objective {
 
     public Objective7(HasAndroidInjector injector) {
-        super(injector, "autosens", R.string.objectives_autosens_objective, R.string.objectives_autosens_gate);
+        super(injector, info.nightscout.androidaps.plugins.constraints.objectives.Objective.AUTO_SENS, R.string.objectives_autosens_objective, R.string.objectives_autosens_gate);
     }
 
     @Override

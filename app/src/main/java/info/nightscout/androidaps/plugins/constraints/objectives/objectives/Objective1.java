@@ -20,7 +20,7 @@ public class Objective1 extends Objective {
 
     @Inject
     public Objective1(HasAndroidInjector injector) {
-        super(injector, "usage", R.string.objectives_usage_objective, R.string.objectives_usage_gate);
+        super(injector, info.nightscout.androidaps.plugins.constraints.objectives.Objective.USAGE, R.string.objectives_usage_objective, R.string.objectives_usage_gate);
         hasSpecialInput = true;
     }
 

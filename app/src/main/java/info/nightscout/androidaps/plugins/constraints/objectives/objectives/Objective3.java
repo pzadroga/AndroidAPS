@@ -25,7 +25,7 @@ public class Objective3 extends Objective {
 
     @Inject
     public Objective3(HasAndroidInjector injector) {
-        super(injector, "openloop", R.string.objectives_openloop_objective, R.string.objectives_openloop_gate);
+        super(injector, info.nightscout.androidaps.plugins.constraints.objectives.Objective.OPEN_LOOP, R.string.objectives_openloop_objective, R.string.objectives_openloop_gate);
         // disable option for skipping objectives for now
         // hasSpecialInput = true;
     }

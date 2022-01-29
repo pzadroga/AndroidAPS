@@ -9,7 +9,7 @@ import info.nightscout.androidaps.utils.T;
 public class Objective8 extends Objective {
 
     public Objective8(HasAndroidInjector injector) {
-        super(injector, "ama", R.string.objectives_ama_objective, 0);
+        super(injector, info.nightscout.androidaps.plugins.constraints.objectives.Objective.AMA, R.string.objectives_ama_objective, 0);
     }
 
     @Override

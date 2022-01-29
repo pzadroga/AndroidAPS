@@ -17,7 +17,7 @@ public class Objective2 extends Objective {
     }
 
     public Objective2(@NotNull HasAndroidInjector injector, boolean isComplete) {
-        super(injector, "exam", R.string.objectives_exam_objective, R.string.objectives_exam_gate);
+        super(injector, info.nightscout.androidaps.plugins.constraints.objectives.Objective.EXAM, R.string.objectives_exam_objective, R.string.objectives_exam_gate);
         if (isComplete) {
             completeAllTasks();
         }

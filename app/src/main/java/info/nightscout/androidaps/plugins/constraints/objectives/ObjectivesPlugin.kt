@@ -6,6 +6,7 @@ import info.nightscout.androidaps.Config
 import info.nightscout.androidaps.R
 import info.nightscout.androidaps.interfaces.*
 import info.nightscout.androidaps.logging.AAPSLogger
+import info.nightscout.androidaps.plugins.constraints.objectives.Objective.*
 import info.nightscout.androidaps.plugins.constraints.objectives.objectives.*
 import info.nightscout.androidaps.utils.DateUtil
 import info.nightscout.androidaps.utils.alertDialogs.OKDialog
@@ -135,26 +136,12 @@ class ObjectivesPlugin @Inject constructor(
         // if (!url.endsWith("/")) url = "$url/"
         // @Suppress("DEPRECATION") val hashNS = Hashing.sha1().hashString(url + BuildConfig.APPLICATION_ID + "/" + requestCode, Charsets.UTF_8).toString()
         if (request.equals("dupa", ignoreCase = true)) {
-            sp.putLong("Objectives_" + "usage" + "_started", DateUtil.now())
-            sp.putLong("Objectives_" + "usage" + "_accomplished", DateUtil.now())
-            sp.putLong("Objectives_" + "exam" + "_started", DateUtil.now())
-            sp.putLong("Objectives_" + "exam" + "_accomplished", DateUtil.now())
-            sp.putLong("Objectives_" + "openloop" + "_started", DateUtil.now())
-            sp.putLong("Objectives_" + "openloop" + "_accomplished", DateUtil.now())
-            // sp.putLong("Objectives_" + "maxbasal" + "_started", DateUtil.now())
-            // sp.putLong("Objectives_" + "maxbasal" + "_accomplished", DateUtil.now())
-            // sp.putLong("Objectives_" + "maxiobzero" + "_started", DateUtil.now())
-            // sp.putLong("Objectives_" + "maxiobzero" + "_accomplished", DateUtil.now())
-            // sp.putLong("Objectives_" + "maxiob" + "_started", DateUtil.now())
-            // sp.putLong("Objectives_" + "maxiob" + "_accomplished", DateUtil.now())
-            // sp.putLong("Objectives_" + "autosens" + "_started", DateUtil.now())
-            // sp.putLong("Objectives_" + "autosens" + "_accomplished", DateUtil.now())
-            // sp.putLong("Objectives_" + "ama" + "_started", DateUtil.now())
-            // sp.putLong("Objectives_" + "ama" + "_accomplished", DateUtil.now())
-            // sp.putLong("Objectives_" + "smb" + "_started", DateUtil.now())
-            // sp.putLong("Objectives_" + "smb" + "_accomplished", DateUtil.now())
-            // sp.putLong("Objectives_" + "auto" + "_started", DateUtil.now())
-            // sp.putLong("Objectives_" + "auto" + "_accomplished", DateUtil.now())
+            for (objective in Objective.values()) {
+                if (objective > CONFIG && objective <= AUTO_SENS) {
+                    sp.putLong("Objectives_" + objective.getName() + "_started", DateUtil.now())
+                    sp.putLong("Objectives_" + objective.getName() + "_accomplished", DateUtil.now())
+                }
+            }
             setupObjectivesComplete()
             OKDialog.show(activity, resourceHelper.gs(R.string.objectives), resourceHelper.gs(R.string.codeaccepted))
         } else {
